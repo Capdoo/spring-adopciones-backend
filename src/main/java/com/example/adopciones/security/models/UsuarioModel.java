@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.example.adopciones.models.DueñoModel;
+import com.example.adopciones.models.DuenoModel;
 
 @Entity
 @Table(name="usuarios")
@@ -53,7 +53,7 @@ public class UsuarioModel {
 	
 	//Dueño referenciado
 	@OneToOne(cascade =  CascadeType.ALL,mappedBy = "usuario")
-	private DueñoModel dueño;
+	private DuenoModel dueno;
 	
 	
 	
@@ -82,7 +82,7 @@ public class UsuarioModel {
 
 
 	public UsuarioModel(int id, String nombre, String nombreUsuario, String dni, String apellidoPaterno,
-			String apellidoMaterno, String telefono, String direccion, String email, String password, DueñoModel dueño,
+			String apellidoMaterno, String telefono, String direccion, String email, String password, DuenoModel dueno,
 			Set<RolModel> roles) {
 		super();
 		this.id = id;
@@ -95,7 +95,7 @@ public class UsuarioModel {
 		this.direccion = direccion;
 		this.email = email;
 		this.password = password;
-		this.dueño = dueño;
+		this.dueno = dueno;
 		this.roles = roles;
 	}
 
@@ -188,12 +188,12 @@ public class UsuarioModel {
 		this.direccion = direccion;
 	}
 
-	public DueñoModel getDueño() {
-		return dueño;
+	public DuenoModel getDueno() {
+		return dueno;
 	}
 
-	public void setDueño(DueñoModel dueño) {
-		this.dueño = dueño;
+	public void setDueño(DuenoModel dueño) {
+		this.dueno = dueño;
 	} 
 
 	

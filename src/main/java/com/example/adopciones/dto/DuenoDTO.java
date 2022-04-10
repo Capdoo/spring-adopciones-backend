@@ -1,6 +1,6 @@
 package com.example.adopciones.dto;
 
-public class DueñoDTO {
+public class DuenoDTO {
 	
 	String fechaRegistro;
 	int historial_id;
@@ -9,11 +9,11 @@ public class DueñoDTO {
 	int usuario_id;
 	
 
-	public DueñoDTO() {
+	public DuenoDTO() {
 		super();
 	}
 	
-	public DueñoDTO(String fechaRegistro, int historial_id, int numero_mascotas, int rate, int usuario_id) {
+	public DuenoDTO(String fechaRegistro, int historial_id, int numero_mascotas, int rate, int usuario_id) {
 		super();
 		this.fechaRegistro = fechaRegistro;
 		this.historial_id = historial_id;

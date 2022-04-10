@@ -5,12 +5,12 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.adopciones.models.DueñoModel;
+import com.example.adopciones.models.DuenoModel;
 
 
-public interface DueñoRepository extends JpaRepository<DueñoModel, Integer>{
+public interface DuenoRepository extends JpaRepository<DuenoModel, Integer>{
 	
-	List<DueñoModel> findAll();
+	List<DuenoModel> findAll();
 
 	
 

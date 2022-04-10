@@ -14,7 +14,7 @@ import com.example.adopciones.security.models.UsuarioModel;
 
 @Entity
 @Table(name="dueños")
-public class DueñoModel {
+public class DuenoModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,11 +36,11 @@ public class DueñoModel {
 	
 	
 	
-	public DueñoModel() {
+	public DuenoModel() {
 		super();
 	}
 
-	public DueñoModel(int id, UsuarioModel usuario, String fechaRegistro, int numeroMascotas, int rate,
+	public DuenoModel(int id, UsuarioModel usuario, String fechaRegistro, int numeroMascotas, int rate,
 			int historial_id) {
 		super();
 		this.id = id;
