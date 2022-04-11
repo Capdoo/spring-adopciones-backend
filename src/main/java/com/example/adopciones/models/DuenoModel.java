@@ -1,11 +1,14 @@
 package com.example.adopciones.models;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.ForeignKey;
@@ -20,11 +23,16 @@ public class DuenoModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	
 	//Id del usuario (OneToOne)
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "DUEÑO_FK_EMPLEADO"))
 	private UsuarioModel usuario;
+	
+	
+	//Para mascotas
+	@OneToMany(mappedBy="dueno")
+	private Set<MascotaModel> mascotas;
+	
 	
 	
 	private String fechaRegistro;
@@ -35,16 +43,17 @@ public class DuenoModel {
 	private int historial_id;
 	
 	
-	
 	public DuenoModel() {
 		super();
 	}
 
-	public DuenoModel(int id, UsuarioModel usuario, String fechaRegistro, int numeroMascotas, int rate,
-			int historial_id) {
+	
+	public DuenoModel(int id, UsuarioModel usuario, Set<MascotaModel> mascotas, String fechaRegistro,
+			int numeroMascotas, int rate, int historial_id) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
+		this.mascotas = mascotas;
 		this.fechaRegistro = fechaRegistro;
 		this.numeroMascotas = numeroMascotas;
 		this.rate = rate;
@@ -88,8 +97,13 @@ public class DuenoModel {
 		this.historial_id = historial_id;
 	}
 
-	
-	
+	public Set<MascotaModel> getMascotas() {
+		return mascotas;
+	}
+
+	public void setMascotas(Set<MascotaModel> mascotas) {
+		this.mascotas = mascotas;
+	}
 	
 	
 }

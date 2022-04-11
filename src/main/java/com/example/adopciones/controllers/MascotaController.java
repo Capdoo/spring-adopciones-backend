@@ -11,22 +11,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.adopciones.dto.DuenoDTO;
+import com.example.adopciones.dto.MascotaDTO;
 import com.example.adopciones.dto.MensajeDTO;
-import com.example.adopciones.services.DuenoService;
+import com.example.adopciones.services.MascotaService;
 
 @RestController
-@RequestMapping("/dueños")
-public class DueñoController {
-
+@RequestMapping("/mascotas")
+public class MascotaController {
+	
 	@Autowired
-	DuenoService duenoService;
+	MascotaService mascotaService;
 	
 	@PostMapping("/registrar")
-	public ResponseEntity<Object> guardar(@RequestBody DuenoDTO dueñoDTO){
+	public ResponseEntity<Object> guardar(@RequestBody MascotaDTO mascotaDTO){
 		
 		try {
-			duenoService.save(dueñoDTO);
+			mascotaService.save(mascotaDTO);
 			return new ResponseEntity<Object>(new MensajeDTO("Registrado con exito"), HttpStatus.OK);
 
 		} catch (Exception e) {
@@ -39,8 +39,8 @@ public class DueñoController {
 	public ResponseEntity<Object> obtener(){
 		
 		try {
-			List<DuenoDTO> listaDuenos = duenoService.listar();
-			return new ResponseEntity<Object>(listaDuenos, HttpStatus.OK);
+			List<MascotaDTO> listaMascotas = mascotaService.listar();
+			return new ResponseEntity<Object>(listaMascotas, HttpStatus.OK);
 
 		} catch (Exception e) {
 			return new ResponseEntity<Object>(new MensajeDTO("Hubo un problema"), HttpStatus.BAD_REQUEST);
@@ -48,4 +48,5 @@ public class DueñoController {
 		
 	}
 	
+
 }
