@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.adopciones.dto.DetalleDTO;
+import com.example.adopciones.dto.StringDTO;
 import com.example.adopciones.models.DetalleModel;
 import com.example.adopciones.repositories.DetalleRepository;
 
@@ -23,12 +24,13 @@ public class DetalleService {
 		List<DetalleDTO> listaDetalles = new ArrayList<>();
 		List<DetalleModel> detallesBD = detalleRepository.findAll();
 		
-		//Single
-		DetalleDTO detalleSingle = new DetalleDTO();
+
 		for(DetalleModel p : detallesBD) {
-			detalleSingle.setId(p.getId());
-			detalleSingle.setEspecie(p.getEspecie());
-			detalleSingle.setRaza(p.getRaza());
+			//Single
+			DetalleDTO detalleSingle = new DetalleDTO();
+				detalleSingle.setId(p.getId());
+				detalleSingle.setEspecie(p.getEspecie());
+				detalleSingle.setRaza(p.getRaza());
 			
 			listaDetalles.add(detalleSingle);
 		}
@@ -36,26 +38,29 @@ public class DetalleService {
 		return listaDetalles;
 	}
 	
-	public List<String> obtenerEspecies(){
-		List<String> listaEspecies = new ArrayList<>();
+	public List<StringDTO> obtenerEspecies(){
+		List<StringDTO> listaEspecies = new ArrayList<>();
 		List<DetalleModel> detallesBD = detalleRepository.findAll();
 		
-		//Single
-
+		
 		for(DetalleModel p : detallesBD) {
-			if(!(existeEspecieEnLista(listaEspecies,p.getEspecie()))) {
-				listaEspecies.add(p.getEspecie());
+			StringDTO stringDTOSingle = new StringDTO();
+			
+			if(!(existeEspecieEnLista(listaEspecies, p.getEspecie()))) {
+				stringDTOSingle.setData(p.getEspecie());
+				
+				listaEspecies.add(stringDTOSingle);
 			}
 		}
 		
 		return listaEspecies;
 	}
 	
-	public boolean existeEspecieEnLista(List<String> listaEspecies, String especie) {
+	public boolean existeEspecieEnLista(List<StringDTO> listaEspecies, String especie) {
 		boolean res = false;
 		
-		for(String p : listaEspecies) {
-			if(especie == p) {
+		for(StringDTO p : listaEspecies) {
+			if(especie.equals(p.getData().toString())) {
 				res = true;
 			}
 		}
@@ -63,13 +68,15 @@ public class DetalleService {
 	}
 	
 	//Obtener Razas Por Especie
-	public List<String> obtenerRazasPorEspecie(String especie){
-		List<String> listaRazas = new ArrayList<>();
+	public List<StringDTO> obtenerRazasPorEspecie(String especie){
+		List<StringDTO> listaRazas = new ArrayList<>();
 
 		List<DetalleModel> detallesBD = detalleRepository.findAllByEspecie(especie);
 		
 		for(DetalleModel p : detallesBD) {
-			listaRazas.add(p.getRaza());
+			StringDTO stringSingle = new StringDTO();
+				stringSingle.setData(p.getRaza());	
+			listaRazas.add(stringSingle);
 		}
 		
 		return listaRazas;

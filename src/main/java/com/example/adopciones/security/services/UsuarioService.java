@@ -29,17 +29,18 @@ public class UsuarioService {
 
 		List<UsuarioModel> listaModels = usuarioRepository.findAll();
 		
-		UsuarioDTO usuarioSingle = new UsuarioDTO();
 		for(UsuarioModel p: listaModels) {
-			usuarioSingle.setApellidoMaterno(p.getApellidoMaterno());
-			usuarioSingle.setApellidoPaterno(p.getApellidoPaterno());
-			usuarioSingle.setDireccion(p.getDireccion());
-			usuarioSingle.setDni(p.getDni());
-			usuarioSingle.setEmail(p.getEmail());
-			usuarioSingle.setNombres(p.getNombre());
-			usuarioSingle.setNombreUsuario(p.getNombreUsuario());
-			usuarioSingle.setTelefono(p.getTelefono());
-			
+			UsuarioDTO usuarioSingle = new UsuarioDTO();
+
+				usuarioSingle.setApellidoMaterno(p.getApellidoMaterno());
+				usuarioSingle.setApellidoPaterno(p.getApellidoPaterno());
+				usuarioSingle.setDireccion(p.getDireccion());
+				usuarioSingle.setDni(p.getDni());
+				usuarioSingle.setEmail(p.getEmail());
+				usuarioSingle.setNombres(p.getNombre());
+				usuarioSingle.setNombreUsuario(p.getNombreUsuario());
+				usuarioSingle.setTelefono(p.getTelefono());
+				
 			listaEnviar.add(usuarioSingle);
 		}
 
