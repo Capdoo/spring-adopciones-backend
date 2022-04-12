@@ -36,15 +36,15 @@ public class MascotaModel {
 	private DuenoModel dueno;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "especie_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "MASCOTA_FK_ESPECIE"))
-	private EspecieModel especie;
+	@JoinColumn(name = "detalle_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "MASCOTA_FK_DETALLE"))
+	private DetalleModel detalle;
 
 	public MascotaModel() {
 		super();
 	}
 	
 	public MascotaModel(int id, String nombre, String genero, int edad, String fechaRegistro, String color,
-			String caracteristica, String tamano, String raza, DuenoModel dueno, EspecieModel especie) {
+			String caracteristica, String tamano, String raza, DuenoModel dueno, DetalleModel detalle) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -56,7 +56,7 @@ public class MascotaModel {
 		this.tamano = tamano;
 		this.raza = raza;
 		this.dueno = dueno;
-		this.especie = especie;
+		this.detalle = detalle;
 	}
 
 
@@ -143,14 +143,13 @@ public class MascotaModel {
 		this.tamano = tamano;
 	}
 
-	public EspecieModel getEspecie() {
-		return especie;
+	public DetalleModel getDetalle() {
+		return detalle;
 	}
 
-	public void setEspecie(EspecieModel especie) {
-		this.especie = especie;
+	public void setDetalle(DetalleModel detalle) {
+		this.detalle = detalle;
 	}
-
 
 	public String getRaza() {
 		return raza;

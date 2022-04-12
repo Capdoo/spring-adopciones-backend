@@ -11,30 +11,33 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="especies")
-public class EspecieModel {
+public class DetalleModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String nombre;
+	private String especie;
+	private String raza;
 
-	@OneToOne(cascade =  CascadeType.ALL, mappedBy = "especie")
+	@OneToOne(cascade =  CascadeType.ALL, mappedBy = "detalle")
 	private MascotaModel mascota;
 
-	public EspecieModel() {
+	public DetalleModel() {
 		super();
 	}
+
 	
-	
-	public EspecieModel(int id, String nombre, MascotaModel mascota) {
+	public DetalleModel(int id, String especie, String raza, MascotaModel mascota) {
 		super();
 		this.id = id;
-		this.nombre = nombre;
+		this.especie = especie;
+		this.raza = raza;
 		this.mascota = mascota;
 	}
 
-	
+
+
 	public int getId() {
 		return id;
 	}
@@ -43,12 +46,20 @@ public class EspecieModel {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getEspecie() {
+		return especie;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setEspecie(String especie) {
+		this.especie = especie;
+	}
+
+	public String getRaza() {
+		return raza;
+	}
+
+	public void setRaza(String raza) {
+		this.raza = raza;
 	}
 
 	public MascotaModel getMascota() {
@@ -58,5 +69,7 @@ public class EspecieModel {
 	public void setMascota(MascotaModel mascota) {
 		this.mascota = mascota;
 	}
+		
+
 
 }
