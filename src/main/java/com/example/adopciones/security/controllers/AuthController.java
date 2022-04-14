@@ -69,12 +69,27 @@ public class AuthController {
 	
 		}
 		
+		
+		/*
 		UsuarioModel usuarioModel = new UsuarioModel(
 										nuevoUsuarioDTO.getNombre(),
 										nuevoUsuarioDTO.getNombreUsuario(),
 										nuevoUsuarioDTO.getEmail(),
 										passwordEncoder.encode(nuevoUsuarioDTO.getPassword())
 									);
+		*/
+		UsuarioModel usuarioModel = new UsuarioModel();
+			usuarioModel.setApellidoPaterno(nuevoUsuarioDTO.getApellidoPaterno());
+			usuarioModel.setApellidoMaterno(nuevoUsuarioDTO.getApellidoMaterno());
+			usuarioModel.setNombre(nuevoUsuarioDTO.getNombre());
+			usuarioModel.setDireccion(nuevoUsuarioDTO.getDireccion());
+			usuarioModel.setDni(nuevoUsuarioDTO.getDni());
+			usuarioModel.setEmail(nuevoUsuarioDTO.getEmail());
+			usuarioModel.setNombreUsuario(nuevoUsuarioDTO.getNombreUsuario());
+			usuarioModel.setPassword(passwordEncoder.encode(nuevoUsuarioDTO.getPassword()));
+			usuarioModel.setTelefono(nuevoUsuarioDTO.getTelefono());
+		
+		
 		
 		Set<RolModel> roles = new HashSet<>();
 		roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());

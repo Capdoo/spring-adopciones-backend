@@ -42,13 +42,13 @@ public class DuenoService {
 		//Traer los datos
 		List<DuenoModel> listaModelsBD = duenoRepository.findAll();
 		
-		DuenoDTO duenoSingle = new DuenoDTO();
 		for(DuenoModel p : listaModelsBD) {
-			duenoSingle.setFechaRegistro(p.getFechaRegistro());
-			duenoSingle.setHistorial_id(p.getHistorial_id());
-			duenoSingle.setNumero_mascotas(p.getNumeroMascotas());
-			duenoSingle.setRate(p.getRate());
-			duenoSingle.setUsuario_id(p.getUsuario().getId());
+			DuenoDTO duenoSingle = new DuenoDTO();
+				duenoSingle.setFechaRegistro(p.getFechaRegistro());
+				duenoSingle.setHistorial_id(p.getHistorial_id());
+				duenoSingle.setNumero_mascotas(p.getNumeroMascotas());
+				duenoSingle.setRate(p.getRate());
+				duenoSingle.setUsuario_id(p.getUsuario().getId());
 				
 			listaVacia.add(duenoSingle);
 		}

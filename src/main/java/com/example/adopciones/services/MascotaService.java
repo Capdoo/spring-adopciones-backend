@@ -41,13 +41,14 @@ public class MascotaService {
 		List<MascotaDTO> listaMascotas = new ArrayList<>();
 		List<MascotaModel> listaBD = mascotaRepository.findAll();
 		
-		MascotaDTO mascotaSingle = new MascotaDTO();
 		for(MascotaModel p : listaBD) {
-			mascotaSingle.setEdad(p.getEdad());
-			mascotaSingle.setFechaRegistro(p.getFechaRegistro());
-			mascotaSingle.setGenero(p.getGenero());
-			mascotaSingle.setIdDueno(p.getDueno().getId());
-			mascotaSingle.setNombre(p.getNombre());
+			MascotaDTO mascotaSingle = new MascotaDTO();
+
+			   	mascotaSingle.setEdad(p.getEdad());
+				mascotaSingle.setFechaRegistro(p.getFechaRegistro());
+				mascotaSingle.setGenero(p.getGenero());
+				mascotaSingle.setIdDueno(p.getDueno().getId());
+				mascotaSingle.setNombre(p.getNombre());
 			
 			listaMascotas.add(mascotaSingle);
 		}

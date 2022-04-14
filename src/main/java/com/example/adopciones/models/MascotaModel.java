@@ -1,5 +1,7 @@
 package com.example.adopciones.models;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -8,13 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="mascotas")
 public class MascotaModel {
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,15 +40,20 @@ public class MascotaModel {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "detalle_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "MASCOTA_FK_DETALLE"))
 	private DetalleModel detalle;
+	
+	//Para mascotas
+	@OneToMany(mappedBy="mascota")
+	private Set<BusquedaModel> busquedas;
 
+	
 	public MascotaModel() {
 		super();
 	}
-	
-	public MascotaModel(int id, String nombre, String genero, int edad, String fechaRegistro, String color,
-			String caracteristica, String tamano, String raza, DuenoModel dueno, DetalleModel detalle) {
+
+	public MascotaModel(String nombre, String genero, int edad, String fechaRegistro, String color,
+			String caracteristica, String tamano, String raza, DuenoModel dueno, DetalleModel detalle,
+			Set<BusquedaModel> busquedas) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.genero = genero;
 		this.edad = edad;
@@ -57,7 +64,10 @@ public class MascotaModel {
 		this.raza = raza;
 		this.dueno = dueno;
 		this.detalle = detalle;
+		this.busquedas = busquedas;
 	}
+
+
 
 
 	public int getId() {
@@ -160,6 +170,17 @@ public class MascotaModel {
 		this.raza = raza;
 	}
 
+	//Busquedas
+
+	public Set<BusquedaModel> getBusquedas() {
+		return busquedas;
+	}
+
+	public void setBusquedas(Set<BusquedaModel> busquedas) {
+		this.busquedas = busquedas;
+	}
+	
+		
 	
 
 }

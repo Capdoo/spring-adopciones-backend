@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.adopciones.dto.MascotaDTO;
 import com.example.adopciones.dto.MensajeDTO;
+import com.example.adopciones.dto.StringDTO;
 import com.example.adopciones.dto.UsuarioDTO;
 import com.example.adopciones.security.services.UsuarioService;
 
@@ -33,8 +37,22 @@ public class UsuarioController {
 		
 	}
 	
+	@PostMapping("/id")
+	public ResponseEntity<Object> obtener(@RequestBody StringDTO stringDTO){
+		
+		try {
+			int id = usuarioService.obtenerIdPorUsername(stringDTO.getData());
+			StringDTO respuesta = new StringDTO();
+				respuesta.setData(id+"");
+			return new ResponseEntity<Object>(respuesta, HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(new MensajeDTO("Hubo un problema"), HttpStatus.BAD_REQUEST);
+		}
+		
+	}
 	
-	
+
 	
 	//Actualizar datos
 	

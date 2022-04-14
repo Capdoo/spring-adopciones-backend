@@ -4,11 +4,13 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import com.example.adopciones.security.models.UsuarioPrincipalModel;
+import com.example.adopciones.security.services.UsuarioService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -30,8 +32,13 @@ public class JwtProvider {
 	@Value("${jwt.expiration}")
 	private int expiration;
 	
+	@Autowired
+	UsuarioService usuarioService;
+	
 	public String generateToken(Authentication authentication) {
 		UsuarioPrincipalModel usuarioPrincipal = (UsuarioPrincipalModel) authentication.getPrincipal();
+		
+		int id = usuarioService.obtenerIdPorUsername(usuarioPrincipal.getUsername());
 		
 		return Jwts.builder().setSubject(usuarioPrincipal.getUsername())
 				.setIssuedAt(new Date())

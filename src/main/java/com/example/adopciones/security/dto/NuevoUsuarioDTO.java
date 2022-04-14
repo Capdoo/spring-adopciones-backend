@@ -5,10 +5,21 @@ import java.util.Set;
 
 public class NuevoUsuarioDTO {
 
+	private String apellidoPaterno;
+	private String apellidoMaterno;
+	private String dni;
+	private String direccion;
+	private String telefono;
+	
+	
 	private String nombre;
 	private String nombreUsuario;
 	private String email;
 	private String password;
+	
+	
+	
+	
 	private Set<String> roles = new HashSet<>();
 	
 	public String getNombre() {
@@ -42,8 +53,40 @@ public class NuevoUsuarioDTO {
 		this.roles = roles;
 	}
 	
+	//--------------New datos-----------------
 	
 	
+	public String getApellidoPaterno() {
+		return apellidoPaterno;
+	}
+	public void setApellidoPaterno(String apellidoPaterno) {
+		this.apellidoPaterno = apellidoPaterno;
+	}
+	public String getApellidoMaterno() {
+		return apellidoMaterno;
+	}
+	public void setApellidoMaterno(String apellidoMaterno) {
+		this.apellidoMaterno = apellidoMaterno;
+	}
+	public String getDni() {
+		return dni;
+	}
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 	
+
 	
 }

@@ -47,7 +47,11 @@ public class UsuarioService {
 		return listaEnviar;
 	}
 	
-	
+	//Para el JWT
+	public int obtenerIdPorUsername(String nombreUsuario) {
+		UsuarioModel usuarioModel =  usuarioRepository.findByNombreUsuario(nombreUsuario).get();
+		return usuarioModel.getId();
+	}
 	
 	//Seguridad
 	public Optional<UsuarioModel> getByNombreUsuario(String nombreUsuario){

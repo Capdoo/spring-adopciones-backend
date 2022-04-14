@@ -81,11 +81,9 @@ public class UsuarioModel {
 
 
 
-	public UsuarioModel(int id, String nombre, String nombreUsuario, String dni, String apellidoPaterno,
-			String apellidoMaterno, String telefono, String direccion, String email, String password, DuenoModel dueno,
-			Set<RolModel> roles) {
+	public UsuarioModel(String nombre, String nombreUsuario, String dni, String apellidoPaterno,
+			String apellidoMaterno, String telefono, String direccion, String email, String password, Set<RolModel> roles) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.nombreUsuario = nombreUsuario;
 		this.dni = dni;
@@ -95,7 +93,6 @@ public class UsuarioModel {
 		this.direccion = direccion;
 		this.email = email;
 		this.password = password;
-		this.dueno = dueno;
 		this.roles = roles;
 	}
 

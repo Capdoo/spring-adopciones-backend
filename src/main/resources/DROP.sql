@@ -1,4 +1,6 @@
 USE adopciones;
+DROP TABLE busquedas;
+
 DROP TABLE mascotas;
 DROP TABLE detalles;
 DROP TABLE dueños;
