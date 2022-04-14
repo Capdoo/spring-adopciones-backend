@@ -2,6 +2,7 @@ package com.example.adopciones.dto;
 
 public class UsuarioDTO {
 
+	private int id;
 	private String nombres;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
@@ -15,9 +16,10 @@ public class UsuarioDTO {
 		super();
 	}
 	
-	public UsuarioDTO(String nombres, String apellidoPaterno, String apellidoMaterno, String direccion, String dni,
+	public UsuarioDTO(int id, String nombres, String apellidoPaterno, String apellidoMaterno, String direccion, String dni,
 			String email, String telefono, String nombreUsuario) {
 		super();
+		this.id = id;
 		this.nombres = nombres;
 		this.apellidoPaterno = apellidoPaterno;
 		this.apellidoMaterno = apellidoMaterno;
@@ -76,5 +78,15 @@ public class UsuarioDTO {
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
+	
+	//id
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	
 }

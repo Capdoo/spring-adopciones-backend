@@ -32,6 +32,7 @@ public class UsuarioService {
 		for(UsuarioModel p: listaModels) {
 			UsuarioDTO usuarioSingle = new UsuarioDTO();
 
+				usuarioSingle.setId(p.getId());
 				usuarioSingle.setApellidoMaterno(p.getApellidoMaterno());
 				usuarioSingle.setApellidoPaterno(p.getApellidoPaterno());
 				usuarioSingle.setDireccion(p.getDireccion());
@@ -64,6 +65,10 @@ public class UsuarioService {
 	
 	public boolean existsByEmail(String email) {
 		return usuarioRepository.existsByEmail(email);
+	}
+	
+	public boolean existsPorId(int id) {
+		return usuarioRepository.existsById(id);
 	}
 	
 	public void save(UsuarioModel usuarioModel) {

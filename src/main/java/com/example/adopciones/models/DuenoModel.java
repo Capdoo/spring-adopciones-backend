@@ -1,5 +1,6 @@
 package com.example.adopciones.models;
 
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class DuenoModel {
 	
 	
 	
-	private String fechaRegistro;
+	private Timestamp fechaRegistro;
 	private int numeroMascotas;
 	
 	//Secundarios
@@ -48,7 +49,7 @@ public class DuenoModel {
 	}
 
 	
-	public DuenoModel(int id, UsuarioModel usuario, Set<MascotaModel> mascotas, String fechaRegistro,
+	public DuenoModel(int id, UsuarioModel usuario, Set<MascotaModel> mascotas, Timestamp fechaRegistro,
 			int numeroMascotas, int rate, int historial_id) {
 		super();
 		this.id = id;
@@ -72,10 +73,10 @@ public class DuenoModel {
 	public void setUsuario(UsuarioModel usuario) {
 		this.usuario = usuario;
 	}
-	public String getFechaRegistro() {
+	public Timestamp getFechaRegistro() {
 		return fechaRegistro;
 	}
-	public void setFechaRegistro(String fechaRegistro) {
+	public void setFechaRegistro(Timestamp fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 	public int getNumeroMascotas() {

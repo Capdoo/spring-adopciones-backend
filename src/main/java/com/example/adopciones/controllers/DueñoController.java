@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.adopciones.dto.DuenoDTO;
 import com.example.adopciones.dto.MensajeDTO;
+import com.example.adopciones.security.services.UsuarioService;
 import com.example.adopciones.services.DuenoService;
 
 @RestController
@@ -22,11 +23,25 @@ public class DueñoController {
 	@Autowired
 	DuenoService duenoService;
 	
+	@Autowired
+	UsuarioService usuarioService;
+	
 	@PostMapping("/registrar")
-	public ResponseEntity<Object> guardar(@RequestBody DuenoDTO dueñoDTO){
+	public ResponseEntity<Object> guardar(@RequestBody DuenoDTO duenoDTO){
 		
 		try {
-			duenoService.save(dueñoDTO);
+ 			if(duenoService.existsDuenoPorUsuarioId(duenoDTO.getUsuario_id())){
+				int a = 10;
+				return new ResponseEntity<Object>(new MensajeDTO("El usuario ya tiene un dueño asignado"), HttpStatus.BAD_REQUEST);
+			}
+			
+			if(!(usuarioService.existsPorId(duenoDTO.getUsuario_id()))){
+				int b = 11;
+				return new ResponseEntity<Object>(new MensajeDTO("El usuario aún no existe"), HttpStatus.BAD_REQUEST);
+			}
+			int c = 12;
+			
+			duenoService.save(duenoDTO);
 			return new ResponseEntity<Object>(new MensajeDTO("Registrado con exito"), HttpStatus.OK);
 
 		} catch (Exception e) {
