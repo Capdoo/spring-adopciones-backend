@@ -1,5 +1,6 @@
 package com.example.adopciones.models;
 
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,14 +25,15 @@ public class MascotaModel {
 	
 	private String nombre;
 	private String genero;
-	private int edad;
-	private String fechaRegistro;
+	private Timestamp fechaNacimiento;
+	private Timestamp fechaRegistro;
 	private String color;
+	//Especificado por el usuario
+	private String razaEspecifica;
 	private String caracteristica;
 	private String tamano;
 	
-	//Insertado por el usuario para no saturar la bd
-	private String raza;
+
 	
 	@ManyToOne
 	@JoinColumn(name="dueño_id",referencedColumnName = "id", nullable=false)
@@ -50,18 +52,18 @@ public class MascotaModel {
 		super();
 	}
 
-	public MascotaModel(String nombre, String genero, int edad, String fechaRegistro, String color,
-			String caracteristica, String tamano, String raza, DuenoModel dueno, DetalleModel detalle,
+	public MascotaModel(String nombre, String genero, Timestamp fechaNacimiento, Timestamp fechaRegistro,
+			String color, String caracteristica, String tamano, String razaEspecifica, DuenoModel dueno, DetalleModel detalle,
 			Set<BusquedaModel> busquedas) {
 		super();
 		this.nombre = nombre;
 		this.genero = genero;
-		this.edad = edad;
+		this.fechaNacimiento = fechaNacimiento;
 		this.fechaRegistro = fechaRegistro;
 		this.color = color;
 		this.caracteristica = caracteristica;
 		this.tamano = tamano;
-		this.raza = raza;
+		this.razaEspecifica = razaEspecifica;
 		this.dueno = dueno;
 		this.detalle = detalle;
 		this.busquedas = busquedas;
@@ -99,23 +101,28 @@ public class MascotaModel {
 		this.genero = genero;
 	}
 
+	
 
-	public int getEdad() {
-		return edad;
+	public Timestamp getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 
 
-	public void setEdad(int edad) {
-		this.edad = edad;
+
+
+	public void setFechaNacimiento(Timestamp fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 
-	public String getFechaRegistro() {
+
+
+	public Timestamp getFechaRegistro() {
 		return fechaRegistro;
 	}
 
 
-	public void setFechaRegistro(String fechaRegistro) {
+	public void setFechaRegistro(Timestamp fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 
@@ -161,17 +168,19 @@ public class MascotaModel {
 		this.detalle = detalle;
 	}
 
-	public String getRaza() {
-		return raza;
+
+
+
+	public String getRazaEspecifica() {
+		return razaEspecifica;
 	}
 
-
-	public void setRaza(String raza) {
-		this.raza = raza;
+	public void setRazaEspecifica(String razaEspecifica) {
+		this.razaEspecifica = razaEspecifica;
 	}
 
 	//Busquedas
-
+	
 	public Set<BusquedaModel> getBusquedas() {
 		return busquedas;
 	}

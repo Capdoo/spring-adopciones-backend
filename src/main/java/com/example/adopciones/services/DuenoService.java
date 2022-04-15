@@ -49,12 +49,13 @@ public class DuenoService {
 		//Traer los datos
 		List<DuenoModel> listaModelsBD = duenoRepository.findAll();
 		
-		FechaUtil fechaUtil = new FechaUtil();
 
 		for(DuenoModel p : listaModelsBD) {
+			FechaUtil fechaUtil = new FechaUtil();
 			DuenoDTO duenoSingle = new DuenoDTO();
 			String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
 			
+				duenoSingle.setId(p.getId());
 				duenoSingle.setFechaRegistro(fechaRegistro);
 				duenoSingle.setHistorial_id(p.getHistorial_id());
 				duenoSingle.setNumero_mascotas(p.getNumeroMascotas());

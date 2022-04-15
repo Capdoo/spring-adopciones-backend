@@ -1,5 +1,6 @@
 package com.example.adopciones.services;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.adopciones.dto.MascotaDTO;
+import com.example.adopciones.models.DetalleModel;
 import com.example.adopciones.models.DuenoModel;
 import com.example.adopciones.models.MascotaModel;
+import com.example.adopciones.repositories.DetalleRepository;
 import com.example.adopciones.repositories.DuenoRepository;
 import com.example.adopciones.repositories.MascotaRepository;
+import com.example.adopciones.utils.FechaUtil;
+import com.example.adopciones.utils.StringUtil;
 
 @Service
 public class MascotaService {
@@ -22,17 +27,36 @@ public class MascotaService {
 	@Autowired
 	DuenoRepository duenoRepository;
 	
+	@Autowired
+	DetalleRepository detalleRepository;
+	
 	public void save(MascotaDTO mascotaDTO) {
 		
 		DuenoModel duenoMascota = duenoRepository.findById(mascotaDTO.getIdDueno()).get();
-		
+		FechaUtil fechaUtil = new FechaUtil();
 		MascotaModel mascotaNueva = new MascotaModel();
-			mascotaNueva.setEdad(mascotaDTO.getEdad());
-			mascotaNueva.setFechaRegistro(mascotaDTO.getFechaRegistro());
-			mascotaNueva.setGenero(mascotaDTO.getGenero());
-			mascotaNueva.setNombre(mascotaDTO.getNombre());
-			mascotaNueva.setDueno(duenoMascota);
 		
+			mascotaNueva.setNombre(mascotaDTO.getNombre());
+			mascotaNueva.setGenero(mascotaDTO.getGenero());
+				Timestamp timeStamp = fechaUtil.obtenerTimeStampDeFecha(mascotaDTO.getFechaNacimiento());
+				mascotaNueva.setFechaNacimiento(timeStamp);
+			mascotaNueva.setFechaRegistro(new Timestamp(System.currentTimeMillis()));
+			mascotaNueva.setColor(mascotaDTO.getColor());
+			mascotaNueva.setCaracteristica(mascotaDTO.getCaracteristica());
+			mascotaNueva.setTamano(mascotaDTO.getTamaño());
+			mascotaNueva.setDueno(duenoMascota);
+
+			if(mascotaDTO.getRazaEspecifica() == null) {
+				DetalleModel detalleMascota = detalleRepository.findByEspecieAndRaza(
+						mascotaDTO.getEspecie(),
+						mascotaDTO.getRaza()).get();
+				mascotaNueva.setDetalle(detalleMascota);
+				mascotaNueva.setRazaEspecifica(null);
+	
+			}else {
+				mascotaNueva.setRazaEspecifica(mascotaDTO.getEspecie()+"#"+mascotaDTO.getRazaEspecifica());
+				mascotaNueva.setDetalle(null);
+			}
 		mascotaRepository.save(mascotaNueva);
 	}
 	
@@ -42,14 +66,37 @@ public class MascotaService {
 		List<MascotaModel> listaBD = mascotaRepository.findAll();
 		
 		for(MascotaModel p : listaBD) {
+			FechaUtil fechaUtil = new FechaUtil();
+			StringUtil stringUtil = new StringUtil();
 			MascotaDTO mascotaSingle = new MascotaDTO();
 
-			   	mascotaSingle.setEdad(p.getEdad());
-				mascotaSingle.setFechaRegistro(p.getFechaRegistro());
+				mascotaSingle.setId(p.getId());
+			   	mascotaSingle.setNombre(p.getNombre());
 				mascotaSingle.setGenero(p.getGenero());
+				
+		   			String fechaNacimiento = fechaUtil.convertirFecha(p.getFechaNacimiento());
+		   			mascotaSingle.setFechaNacimiento(fechaNacimiento);
+				
+			   		String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
+					mascotaSingle.setFechaRegistro(fechaRegistro);
+					
+				mascotaSingle.setColor(p.getColor());
+				mascotaSingle.setCaracteristica(p.getCaracteristica());	
+				mascotaSingle.setTamaño(p.getTamano());
 				mascotaSingle.setIdDueno(p.getDueno().getId());
-				mascotaSingle.setNombre(p.getNombre());
-			
+
+				if(p.getRazaEspecifica()==null) {
+					mascotaSingle.setEspecie(p.getDetalle().getEspecie());
+					mascotaSingle.setRaza(p.getDetalle().getRaza());
+					mascotaSingle.setRazaEspecifica(null);
+					mascotaSingle.setIdDetalle(p.getDetalle().getId());
+				}else {
+					mascotaSingle.setEspecie(stringUtil.obtenerEspecieToken(p.getRazaEspecifica()));
+					mascotaSingle.setRaza(null);
+					mascotaSingle.setRazaEspecifica(stringUtil.obtenerRazaToken(p.getRazaEspecifica()));
+				}
+				
+				
 			listaMascotas.add(mascotaSingle);
 		}
 		

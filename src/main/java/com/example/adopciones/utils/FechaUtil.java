@@ -1,7 +1,9 @@
 package com.example.adopciones.utils;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FechaUtil {
 private int id;
@@ -17,8 +19,21 @@ private int id;
 
 	//Convertir TimeStamp en fecha String
 	
-	public String obtenerFechaDeTimeStamp(Timestamp mytimestamp) {
-		return new SimpleDateFormat("MM/dd/yyyy").format(mytimestamp);
+	public Timestamp obtenerTimeStampDeFecha(String fecha) {
+		
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	    Date parsedDate;
+		try {
+			parsedDate = dateFormat.parse(fecha);
+		    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+			return timestamp;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+
 	}
 	
 	public String convertirFecha(Timestamp mytimestamp) {
