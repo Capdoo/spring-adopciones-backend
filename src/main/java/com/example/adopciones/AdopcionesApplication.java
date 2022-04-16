@@ -20,7 +20,7 @@ public class AdopcionesApplication {
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
-		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
 		//corsConfiguration.setAllowedOrigins(Arrays.asList("http://192.168.110.36:8080/emp-solidarias-front"));
 		
 		//corsConfiguration.setAllowedOrigins(Arrays.asList("https://empresas-solidarias-dev.herokuapp.com/"));
