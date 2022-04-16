@@ -19,7 +19,7 @@ public class AdopcionesApplication {
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
-		corsConfiguration.setAllowCredentials(true);
+		corsConfiguration.setAllowCredentials(false);
 		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
 		//corsConfiguration.setAllowedOrigins(Arrays.asList("http://192.168.110.36:8080/emp-solidarias-front"));
 		
