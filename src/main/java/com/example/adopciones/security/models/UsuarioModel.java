@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.adopciones.models.DuenoModel;
+import com.example.adopciones.models.RefugioModel;
 
 @Entity
 @Table(name="usuarios")
@@ -55,6 +56,9 @@ public class UsuarioModel {
 	@OneToOne(cascade =  CascadeType.ALL,mappedBy = "usuario")
 	private DuenoModel dueno;
 	
+	//Refugio
+	@OneToOne(cascade =  CascadeType.ALL,mappedBy = "usuario")
+	private RefugioModel refugio;
 	
 	
 	@ManyToMany(fetch=FetchType.EAGER)

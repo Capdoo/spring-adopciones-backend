@@ -46,31 +46,35 @@ public class MascotaModel {
 	//Para mascotas
 	@OneToMany(mappedBy="mascota")
 	private Set<BusquedaModel> busquedas;
+	
+	//Refugios
+	@ManyToOne
+	@JoinColumn(name="refugio_id",referencedColumnName = "id", nullable=false)
+	private RefugioModel refugio;
 
 	
 	public MascotaModel() {
 		super();
 	}
 
-	public MascotaModel(String nombre, String genero, Timestamp fechaNacimiento, Timestamp fechaRegistro,
-			String color, String caracteristica, String tamano, String razaEspecifica, DuenoModel dueno, DetalleModel detalle,
-			Set<BusquedaModel> busquedas) {
+	public MascotaModel(int id, String nombre, String genero, Timestamp fechaNacimiento, Timestamp fechaRegistro,
+			String color, String razaEspecifica, String caracteristica, String tamano, DuenoModel dueno,
+			DetalleModel detalle, Set<BusquedaModel> busquedas, RefugioModel refugio) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.genero = genero;
 		this.fechaNacimiento = fechaNacimiento;
 		this.fechaRegistro = fechaRegistro;
 		this.color = color;
+		this.razaEspecifica = razaEspecifica;
 		this.caracteristica = caracteristica;
 		this.tamano = tamano;
-		this.razaEspecifica = razaEspecifica;
 		this.dueno = dueno;
 		this.detalle = detalle;
 		this.busquedas = busquedas;
+		this.refugio = refugio;
 	}
-
-
-
 
 	public int getId() {
 		return id;
@@ -188,8 +192,17 @@ public class MascotaModel {
 	public void setBusquedas(Set<BusquedaModel> busquedas) {
 		this.busquedas = busquedas;
 	}
+
+	//Refugios
+
+	public RefugioModel getRefugio() {
+		return refugio;
+	}
+
+	public void setRefugio(RefugioModel refugio) {
+		this.refugio = refugio;
+	}
 	
-		
 	
 
 }

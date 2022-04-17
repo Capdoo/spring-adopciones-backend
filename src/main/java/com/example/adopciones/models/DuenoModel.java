@@ -23,6 +23,12 @@ public class DuenoModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	private Timestamp fechaRegistro;
+	private int numeroMascotas;
+	
+	//Secundarios
+	private int rate;
+	private int historial_id;
 	
 	//Id del usuario (OneToOne)
 	@OneToOne(cascade = CascadeType.ALL)
@@ -33,15 +39,6 @@ public class DuenoModel {
 	//Para mascotas
 	@OneToMany(mappedBy="dueno")
 	private Set<MascotaModel> mascotas;
-	
-	
-	
-	private Timestamp fechaRegistro;
-	private int numeroMascotas;
-	
-	//Secundarios
-	private int rate;
-	private int historial_id;
 	
 	
 	public DuenoModel() {

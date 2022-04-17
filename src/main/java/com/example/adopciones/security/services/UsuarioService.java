@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.adopciones.dto.UsuarioDTO;
+import com.example.adopciones.repositories.DuenoRepository;
 import com.example.adopciones.security.models.UsuarioModel;
 import com.example.adopciones.security.repositories.UsuarioRepository;
+import com.example.adopciones.services.DuenoService;
 
 
 @Service
@@ -22,6 +24,8 @@ public class UsuarioService {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 	
+	@Autowired
+	DuenoRepository duenoRepository;
 	
 	//Obtener
 	public List<UsuarioDTO> listar(){

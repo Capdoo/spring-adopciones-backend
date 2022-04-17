@@ -15,7 +15,10 @@ import com.example.adopciones.dto.MascotaDTO;
 import com.example.adopciones.dto.MensajeDTO;
 import com.example.adopciones.dto.StringDTO;
 import com.example.adopciones.dto.UsuarioDTO;
+import com.example.adopciones.security.models.UsuarioModel;
+import com.example.adopciones.security.repositories.UsuarioRepository;
 import com.example.adopciones.security.services.UsuarioService;
+import com.example.adopciones.services.DuenoService;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -23,6 +26,9 @@ public class UsuarioController {
 	
 	@Autowired
 	UsuarioService usuarioService;
+	
+	@Autowired
+	DuenoService duenoService;
 	
 	@GetMapping("/obtener")
 	public ResponseEntity<Object> obtener(){
@@ -52,7 +58,21 @@ public class UsuarioController {
 		
 	}
 	
+	@PostMapping("/isDueño")
+	public ResponseEntity<Object> isDueno(@RequestBody StringDTO stringDTO){
+		
+		try {
+			int idUsuario = usuarioService.obtenerIdPorUsername(stringDTO.getData());
+			boolean res = duenoService.existsDuenoPorUsuarioId(idUsuario);
+			StringDTO respuesta = new StringDTO();
+				respuesta.setData(res+"");
+			return new ResponseEntity<Object>(respuesta, HttpStatus.OK);
 
+		} catch (Exception e) {
+			return new ResponseEntity<Object>(new MensajeDTO("Hubo un problema"), HttpStatus.BAD_REQUEST);
+		}
+		
+	}
 	
 	//Actualizar datos
 	
