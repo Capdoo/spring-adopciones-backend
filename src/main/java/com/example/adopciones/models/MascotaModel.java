@@ -36,7 +36,7 @@ public class MascotaModel {
 
 	
 	@ManyToOne
-	@JoinColumn(name="dueño_id",referencedColumnName = "id", nullable=false)
+	@JoinColumn(name="dueño_id",referencedColumnName = "id", nullable=true)
 	private DuenoModel dueno;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -49,7 +49,7 @@ public class MascotaModel {
 	
 	//Refugios
 	@ManyToOne
-	@JoinColumn(name="refugio_id",referencedColumnName = "id", nullable=false)
+	@JoinColumn(name="refugio_id",referencedColumnName = "id", nullable=true)
 	private RefugioModel refugio;
 
 	

@@ -57,6 +57,7 @@ public class MascotaService {
 				mascotaNueva.setRazaEspecifica(mascotaDTO.getEspecie()+"#"+mascotaDTO.getRazaEspecifica());
 				mascotaNueva.setDetalle(null);
 			}
+		mascotaNueva.setRefugio(null);
 		mascotaRepository.save(mascotaNueva);
 	}
 	

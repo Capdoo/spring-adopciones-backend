@@ -3,7 +3,7 @@ DROP TABLE busquedas;
 DROP TABLE mascotas;
 DROP TABLE detalles;
 DROP TABLE dueños;
+DROP TABLE refugios;
 DROP TABLE usuario_roles;
 DROP TABLE usuarios;
 DROP TABLE roles;
-DROP TABLE refugios;
