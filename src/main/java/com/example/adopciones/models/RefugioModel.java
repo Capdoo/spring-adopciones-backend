@@ -23,7 +23,7 @@ public class RefugioModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String nombreRefugio;
+	private String nombre;
 	private int numeroAsociados;
 	private Timestamp fechaRegistro;
 	private String numeroContacto;
@@ -43,12 +43,12 @@ public class RefugioModel {
 		super();
 	}
 
-	public RefugioModel(int id, String nombreRefugio, int numeroAsociados, Timestamp fechaRegistro,
+	public RefugioModel(int id, String nombre, int numeroAsociados, Timestamp fechaRegistro,
 			String numeroContacto, String direccion, String distrito, UsuarioModel usuario,
 			Set<MascotaModel> mascotas) {
 		super();
 		this.id = id;
-		this.nombreRefugio = nombreRefugio;
+		this.nombre = nombre;
 		this.numeroAsociados = numeroAsociados;
 		this.fechaRegistro = fechaRegistro;
 		this.numeroContacto = numeroContacto;
@@ -66,12 +66,12 @@ public class RefugioModel {
 		this.id = id;
 	}
 
-	public String getNombreRefugio() {
-		return nombreRefugio;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreRefugio(String nombreRefugio) {
-		this.nombreRefugio = nombreRefugio;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public UsuarioModel getUsuario() {

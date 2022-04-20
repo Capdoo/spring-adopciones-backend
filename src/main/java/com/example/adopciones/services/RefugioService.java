@@ -1,0 +1,128 @@
+package com.example.adopciones.services;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.adopciones.dto.BusquedaDTO;
+import com.example.adopciones.dto.RefugioDTO;
+import com.example.adopciones.models.BusquedaModel;
+import com.example.adopciones.models.MascotaModel;
+import com.example.adopciones.models.RefugioModel;
+import com.example.adopciones.repositories.BusquedaRepository;
+import com.example.adopciones.repositories.MascotaRepository;
+import com.example.adopciones.repositories.RefugioRepository;
+import com.example.adopciones.security.models.UsuarioModel;
+import com.example.adopciones.security.repositories.UsuarioRepository;
+import com.example.adopciones.utils.FechaUtil;
+
+@Service
+public class RefugioService {
+
+	@Autowired
+	RefugioRepository refugioRepository;
+	
+	@Autowired
+	UsuarioRepository usuarioRepository;
+
+	public void save(RefugioDTO refugioDTO) {
+		
+		UsuarioModel usuarioRepresentante = usuarioRepository.findById(refugioDTO.getIdRepresentante()).get();
+		
+		RefugioModel refugioNuevo = new RefugioModel();
+			refugioNuevo.setDireccion(refugioDTO.getDireccion());
+			refugioNuevo.setDistrito(refugioDTO.getDistrito());
+			refugioNuevo.setFechaRegistro(new Timestamp(System.currentTimeMillis()));
+			refugioNuevo.setNombre(refugioDTO.getNombre());
+			refugioNuevo.setNumeroContacto(refugioDTO.getNumeroContacto());
+			refugioNuevo.setUsuario(usuarioRepresentante);
+			
+		refugioRepository.save(refugioNuevo);
+	}
+	
+	
+	
+	
+	//Obtener todos
+	public List<RefugioDTO> listar(){
+		List<RefugioDTO> listaEnviar = new ArrayList<>();
+		List<RefugioModel> listaBD = refugioRepository.findAll();
+
+		
+		for(RefugioModel p : listaBD) {
+			FechaUtil fechaUtil = new FechaUtil();
+			RefugioDTO refugioSingle = new RefugioDTO();
+
+				refugioSingle.setId(p.getId());
+				refugioSingle.setDireccion(p.getDireccion());
+				refugioSingle.setDistrito(p.getDistrito());
+
+					String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
+					refugioSingle.setFechaRegistro(fechaRegistro);
+				
+				refugioSingle.setIdRepresentante(p.getUsuario().getId());
+				refugioSingle.setNombre(p.getNombre());
+				refugioSingle.setNumeroAsociados(p.getNumeroAsociados());
+				refugioSingle.setNumeroContacto(p.getNumeroContacto());
+
+			listaEnviar.add(refugioSingle);
+			
+		}
+		return listaEnviar;
+	}
+	
+	//Obtener por usuario_id
+	public List<RefugioDTO> obtenerPorUsuarioId(int usuarioId){
+		List<RefugioDTO> listaEnviar = new ArrayList<>();
+		UsuarioModel usuarioModel = usuarioRepository.findById(usuarioId).get();
+		
+		List<RefugioModel> listaBD = refugioRepository.findAllByUsuario(usuarioModel);
+		
+		for(RefugioModel p : listaBD) {
+			FechaUtil fechaUtil = new FechaUtil();
+			RefugioDTO refugioSingle = new RefugioDTO();
+
+				refugioSingle.setId(p.getId());
+				refugioSingle.setDireccion(p.getDireccion());
+				refugioSingle.setDistrito(p.getDistrito());
+
+					String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
+					refugioSingle.setFechaRegistro(fechaRegistro);
+				
+				refugioSingle.setIdRepresentante(p.getUsuario().getId());
+				refugioSingle.setNombre(p.getNombre());
+				refugioSingle.setNumeroAsociados(p.getNumeroAsociados());
+				refugioSingle.setNumeroContacto(p.getNumeroContacto());
+
+			listaEnviar.add(refugioSingle);
+			
+		}
+		return listaEnviar;
+	}
+	
+	//Obtener por id
+	public RefugioDTO obtenerPorId(int id){
+
+		RefugioModel p = refugioRepository.findById(id).get();
+
+		FechaUtil fechaUtil = new FechaUtil();
+		RefugioDTO refugioSingle = new RefugioDTO();
+
+			refugioSingle.setId(p.getId());
+			refugioSingle.setDireccion(p.getDireccion());
+			refugioSingle.setDistrito(p.getDistrito());
+
+				String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
+				refugioSingle.setFechaRegistro(fechaRegistro);
+			
+			refugioSingle.setIdRepresentante(p.getUsuario().getId());
+			refugioSingle.setNombre(p.getNombre());
+			refugioSingle.setNumeroAsociados(p.getNumeroAsociados());
+			refugioSingle.setNumeroContacto(p.getNumeroContacto());
+
+		return refugioSingle;
+	}
+}
