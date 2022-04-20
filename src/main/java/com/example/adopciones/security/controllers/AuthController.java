@@ -97,6 +97,10 @@ public class AuthController {
 			roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
 		}
 		
+		if (nuevoUsuarioDTO.getRoles().contains("rept")) {
+			roles.add(rolService.getByRolNombre(RolNombre.ROLE_REPT).get());
+		}
+		
 		usuarioModel.setRoles(roles);
 		usuarioService.save(usuarioModel);
 		
