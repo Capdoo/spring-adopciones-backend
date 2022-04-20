@@ -20,7 +20,7 @@ public class BusquedaDTO {
 	}
 
 	
-
+	//cambiable
 	public BusquedaDTO(int id, String direccion, String distrito, String telefonoA, String telefonoB, int mascotaId,
 			String fechaPerdida, String fechaRegistro, String mensaje) {
 		super();
