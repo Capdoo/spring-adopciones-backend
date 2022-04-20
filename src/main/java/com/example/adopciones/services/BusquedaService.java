@@ -25,17 +25,23 @@ public class BusquedaService {
 
 	public void save(BusquedaDTO busquedaDTO) {
 		
+		FechaUtil fechaUtil = new FechaUtil();
 		MascotaModel mascotaSeleccionada = mascotaRepository.findById(busquedaDTO.getMascotaId()).get();
 		
 		BusquedaModel busquedaNueva = new BusquedaModel();
 			busquedaNueva.setDireccion(busquedaDTO.getDireccion());
 			busquedaNueva.setDistrito(busquedaDTO.getDistrito());
-			busquedaNueva.setFechaPerdida(null);
+		
+				Timestamp fechaPerdida = fechaUtil.obtenerTimeStampDeFecha(busquedaDTO.getFechaPerdida());
+				busquedaNueva.setFechaPerdida(fechaPerdida);
+			
 			busquedaNueva.setFechaRegistro(new Timestamp(System.currentTimeMillis()));
 			busquedaNueva.setMascota(mascotaSeleccionada);
 			
 			busquedaNueva.setTelefonoA(busquedaDTO.getTelefonoA());
 			busquedaNueva.setTelefonoB(busquedaDTO.getTelefonoB());
+			
+			busquedaNueva.setMensaje(busquedaDTO.getMensaje());
 		busquedaRepository.save(busquedaNueva);
 	}
 	
@@ -43,22 +49,26 @@ public class BusquedaService {
 	public List<BusquedaDTO> listar(){
 		List<BusquedaDTO> listaEnviar = new ArrayList<>();
 		List<BusquedaModel> listaBD = busquedaRepository.findAll();
-		FechaUtil fechaUtil = new FechaUtil();
+
 		
 		for(BusquedaModel p : listaBD) {
+			FechaUtil fechaUtil = new FechaUtil();
 			BusquedaDTO busquedaSingle = new BusquedaDTO();
-				//String fechaPerdida = fechaUtil.convertirFecha(p.getFechaPerdida());
-				String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
-				
-				busquedaSingle.setId(p.getId());
 
+				busquedaSingle.setId(p.getId());
 				busquedaSingle.setDireccion(p.getDireccion());
 				busquedaSingle.setDistrito(p.getDistrito());
-				busquedaSingle.setFechaPerdida(null);	//cambiable
-				busquedaSingle.setFechaRegistro(fechaRegistro);
+				
+					String fechaPerdida = fechaUtil.convertirFecha(p.getFechaPerdida());
+					busquedaSingle.setFechaPerdida(fechaPerdida);
+					
+					String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
+					busquedaSingle.setFechaRegistro(fechaRegistro);
+				
 				busquedaSingle.setMascotaId(p.getMascota().getId());
 				busquedaSingle.setTelefonoA(p.getTelefonoA());
 				busquedaSingle.setTelefonoB(p.getTelefonoB());
+				busquedaSingle.setMensaje(p.getMensaje());
 			listaEnviar.add(busquedaSingle);
 			
 		}
@@ -72,21 +82,23 @@ public class BusquedaService {
 		
 		List<BusquedaModel> listaBD = busquedaRepository.findAllByMascota(mascotaSeleccionada);
 		
-		FechaUtil fechaUtil = new FechaUtil();
 		for(BusquedaModel p : listaBD) {
 			BusquedaDTO busquedaSingle = new BusquedaDTO();
-				//String fechaPerdida = fechaUtil.convertirFecha(p.getFechaPerdida());
-				String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
-				
+			FechaUtil fechaUtil = new FechaUtil();
+
 				busquedaSingle.setId(p.getId());
-				
 				busquedaSingle.setDireccion(p.getDireccion());
 				busquedaSingle.setDistrito(p.getDistrito());
-				busquedaSingle.setFechaPerdida(null); //cambiable
-				busquedaSingle.setFechaRegistro(fechaRegistro);
+					String fechaPerdida = fechaUtil.convertirFecha(p.getFechaPerdida());
+					busquedaSingle.setFechaPerdida(fechaPerdida);
+					
+					String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
+					busquedaSingle.setFechaRegistro(fechaRegistro);
+					
 				busquedaSingle.setMascotaId(p.getMascota().getId());
 				busquedaSingle.setTelefonoA(p.getTelefonoA());
 				busquedaSingle.setTelefonoB(p.getTelefonoB());
+				busquedaSingle.setMensaje(p.getMensaje());
 			listaEnviar.add(busquedaSingle);
 			
 		}
@@ -97,23 +109,25 @@ public class BusquedaService {
 	public BusquedaDTO obtenerPorId(int id){
 		
 		BusquedaModel p = busquedaRepository.findById(id).get();
-		FechaUtil fechaUtil = new FechaUtil();
 		
 		BusquedaDTO busquedaSingle = new BusquedaDTO();
-			//String fechaPerdida = fechaUtil.convertirFecha(p.getFechaPerdida());
-			String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
-			
+			FechaUtil fechaUtil = new FechaUtil();
+
 			busquedaSingle.setId(p.getId());
 			
 			busquedaSingle.setDireccion(p.getDireccion());
 			busquedaSingle.setDistrito(p.getDistrito());
-			busquedaSingle.setFechaPerdida(null);
-			busquedaSingle.setFechaRegistro(fechaRegistro);
+				String fechaPerdida = fechaUtil.convertirFecha(p.getFechaPerdida());
+				busquedaSingle.setFechaPerdida(fechaPerdida);
+				
+				String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
+				busquedaSingle.setFechaRegistro(fechaRegistro);
 			busquedaSingle.setMascotaId(p.getMascota().getId());
 			busquedaSingle.setTelefonoA(p.getTelefonoA());
 			busquedaSingle.setTelefonoB(p.getTelefonoB());
 			
-		
+			busquedaSingle.setMensaje(p.getMensaje());
+
 		return busquedaSingle;
 	}
 	

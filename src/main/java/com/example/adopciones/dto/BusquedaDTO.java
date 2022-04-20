@@ -11,13 +11,18 @@ public class BusquedaDTO {
 	//Fecha de usuario
 	private String fechaPerdida;
 	private String fechaRegistro;
+	
+	//Mensaje
+	private String mensaje;
 
 	public BusquedaDTO() {
 		super();
 	}
 
+	
+
 	public BusquedaDTO(int id, String direccion, String distrito, String telefonoA, String telefonoB, int mascotaId,
-			String fechaPerdida, String fechaRegistro) {
+			String fechaPerdida, String fechaRegistro, String mensaje) {
 		super();
 		this.id = id;
 		this.direccion = direccion;
@@ -27,8 +32,10 @@ public class BusquedaDTO {
 		this.mascotaId = mascotaId;
 		this.fechaPerdida = fechaPerdida;
 		this.fechaRegistro = fechaRegistro;
+		this.mensaje = mensaje;
 	}
-	
+
+
 
 	public int getId() {
 		return id;
@@ -96,6 +103,14 @@ public class BusquedaDTO {
 
 	public void setFechaRegistro(String fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
+	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 
 

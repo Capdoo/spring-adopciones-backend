@@ -27,6 +27,7 @@ public class BusquedaModel {
 	private Timestamp fechaPerdida;
 	private String telefonoA;
 	private String telefonoB;
+	private String mensaje;
 	
 	@ManyToOne
 	@JoinColumn(name="mascota_id",referencedColumnName = "id", nullable=false)
@@ -36,8 +37,8 @@ public class BusquedaModel {
 		super();
 	}
 	
-	public BusquedaModel(String direccion, String distrito, Timestamp fechaRegistro, Timestamp fechaPerdida,String telefonoA,
-			String telefonoB, MascotaModel mascota) {
+	public BusquedaModel(String direccion, String distrito, Timestamp fechaRegistro, Timestamp fechaPerdida,
+			String telefonoA, String telefonoB, String mensaje, MascotaModel mascota) {
 		super();
 		this.direccion = direccion;
 		this.distrito = distrito;
@@ -45,9 +46,22 @@ public class BusquedaModel {
 		this.fechaPerdida = fechaPerdida;
 		this.telefonoA = telefonoA;
 		this.telefonoB = telefonoB;
+		this.mensaje = mensaje;
 		this.mascota = mascota;
 	}
-	
+
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+
+
+
+
 	public int getId() {
 		return id;
 	}
