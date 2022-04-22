@@ -43,9 +43,13 @@ public class MascotaModel {
 	@JoinColumn(name = "detalle_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "MASCOTA_FK_DETALLE"))
 	private DetalleModel detalle;
 	
-	//Para mascotas
+	//Para busquedas
 	@OneToMany(mappedBy="mascota")
 	private Set<BusquedaModel> busquedas;
+	
+	//Para adopciones
+	@OneToMany(mappedBy="mascota")
+	private Set<BusquedaModel> adopciones;
 	
 	//Refugios
 	@ManyToOne
