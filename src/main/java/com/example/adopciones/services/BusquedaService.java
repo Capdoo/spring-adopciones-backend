@@ -74,7 +74,7 @@ public class BusquedaService {
 				
 				//Nuevo: Nombre y raza (especie)
 				busquedaSingle.setNombreMascota(p.getMascota().getNombre());
-				if(p.getMascota().getDetalle() == null) {
+				if(p.getMascota().getDetalle() != null) {
 					busquedaSingle.setEspecieMascota(p.getMascota().getDetalle().getEspecie());
 					busquedaSingle.setRazaMascota(p.getMascota().getDetalle().getRaza());
 				}else {
