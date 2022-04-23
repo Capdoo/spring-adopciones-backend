@@ -8,6 +8,11 @@ public class BusquedaDTO {
 	private String telefonoA;
 	private String telefonoB;
 	private int mascotaId;
+	
+	private String nombreMascota;
+	private String especieMascota;
+	private String razaMascota;
+	
 	//Fecha de usuario
 	private String fechaPerdida;
 	private String fechaRegistro;
@@ -111,6 +116,36 @@ public class BusquedaDTO {
 
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
+	}
+
+
+	public String getNombreMascota() {
+		return nombreMascota;
+	}
+
+
+	public void setNombreMascota(String nombreMascota) {
+		this.nombreMascota = nombreMascota;
+	}
+
+
+	public String getEspecieMascota() {
+		return especieMascota;
+	}
+
+
+	public void setEspecieMascota(String especieMascota) {
+		this.especieMascota = especieMascota;
+	}
+
+
+	public String getRazaMascota() {
+		return razaMascota;
+	}
+
+
+	public void setRazaMascota(String razaMascota) {
+		this.razaMascota = razaMascota;
 	}
 
 

@@ -13,6 +13,7 @@ import com.example.adopciones.models.MascotaModel;
 import com.example.adopciones.repositories.BusquedaRepository;
 import com.example.adopciones.repositories.MascotaRepository;
 import com.example.adopciones.utils.FechaUtil;
+import com.example.adopciones.utils.StringUtil;
 
 @Service
 public class BusquedaService {
@@ -53,6 +54,7 @@ public class BusquedaService {
 		
 		for(BusquedaModel p : listaBD) {
 			FechaUtil fechaUtil = new FechaUtil();
+			StringUtil stringUtil = new StringUtil();
 			BusquedaDTO busquedaSingle = new BusquedaDTO();
 
 				busquedaSingle.setId(p.getId());
@@ -69,6 +71,17 @@ public class BusquedaService {
 				busquedaSingle.setTelefonoA(p.getTelefonoA());
 				busquedaSingle.setTelefonoB(p.getTelefonoB());
 				busquedaSingle.setMensaje(p.getMensaje());
+				
+				//Nuevo: Nombre y raza (especie)
+				busquedaSingle.setNombreMascota(p.getMascota().getNombre());
+				if(p.getMascota().getDetalle() == null) {
+					busquedaSingle.setEspecieMascota(p.getMascota().getDetalle().getEspecie());
+					busquedaSingle.setRazaMascota(p.getMascota().getDetalle().getRaza());
+				}else {
+					busquedaSingle.setEspecieMascota(stringUtil.obtenerEspecieToken(p.getMascota().getRazaEspecifica()));
+					busquedaSingle.setRazaMascota(stringUtil.obtenerRazaToken(p.getMascota().getRazaEspecifica()));
+				}
+				
 			listaEnviar.add(busquedaSingle);
 			
 		}
