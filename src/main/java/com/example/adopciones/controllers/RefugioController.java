@@ -53,11 +53,10 @@ public class RefugioController {
 	}
 	
 	@PostMapping("/obtener/usuario")
-	public ResponseEntity<Object> obtenerPorUsuarioId(@RequestBody StringDTO stringDTO){
+	public ResponseEntity<Object> obtenerPorDniUsuario(@RequestBody StringDTO stringDTO){
 		
 		try {
-			int idUsuario = Integer.parseInt(stringDTO.getData());
-			List<RefugioDTO> listaRefugios = refugioService.obtenerPorUsuarioId(idUsuario);
+			List<RefugioDTO> listaRefugios = refugioService.obtenerPorDniUsuario(stringDTO.getData());
 			return new ResponseEntity<Object>(listaRefugios, HttpStatus.OK);
 
 		} catch (Exception e) {

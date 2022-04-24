@@ -79,9 +79,9 @@ public class RefugioService {
 	}
 	
 	//Obtener por usuario_id
-	public List<RefugioDTO> obtenerPorUsuarioId(int usuarioId){
+	public List<RefugioDTO> obtenerPorDniUsuario(String dniUsuario){
 		List<RefugioDTO> listaEnviar = new ArrayList<>();
-		UsuarioModel usuarioModel = usuarioRepository.findById(usuarioId).get();
+		UsuarioModel usuarioModel = usuarioRepository.findByDni(dniUsuario).get();
 		
 		List<RefugioModel> listaBD = refugioRepository.findAllByUsuario(usuarioModel);
 		

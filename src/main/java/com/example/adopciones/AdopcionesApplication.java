@@ -8,12 +8,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import com.cloudinary.*;
+import com.cloudinary.utils.ObjectUtils;
+
 
 @SpringBootApplication
 public class AdopcionesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdopcionesApplication.class, args);
+		
+		Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+				"cloud_name", "unmsm234",
+				"api_key", "872387794637319",
+				"api_secret", "xF-9FwzZamaUbqtmWNbBcweiJoU",
+				"secure", true));
+		
 	}
 	
 	@Bean
