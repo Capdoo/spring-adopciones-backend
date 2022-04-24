@@ -39,9 +39,10 @@ public class RefugioService {
 			refugioNuevo.setDistrito(refugioDTO.getDistrito());
 			refugioNuevo.setFechaRegistro(new Timestamp(System.currentTimeMillis()));
 			refugioNuevo.setNombre(refugioDTO.getNombre());
+			refugioNuevo.setNumeroAsociados(refugioDTO.getNumeroAsociados());
 			refugioNuevo.setNumeroContacto(refugioDTO.getNumeroContacto());
 			refugioNuevo.setUsuario(usuarioRepresentante);
-			
+						
 		refugioRepository.save(refugioNuevo);
 	}
 	
@@ -65,7 +66,7 @@ public class RefugioService {
 					String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
 					refugioSingle.setFechaRegistro(fechaRegistro);
 				
-				//refugioSingle.setIdRepresentante(p.getUsuario().getId());
+				//refugioSingle.setIdRepresentante(null);
 				refugioSingle.setNombre(p.getNombre());
 				refugioSingle.setNumeroAsociados(p.getNumeroAsociados());
 				refugioSingle.setNumeroContacto(p.getNumeroContacto());
