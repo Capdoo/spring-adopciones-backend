@@ -30,7 +30,9 @@ public class RefugioService {
 
 	public void save(RefugioDTO refugioDTO) {
 		
-		UsuarioModel usuarioRepresentante = usuarioRepository.findById(refugioDTO.getIdRepresentante()).get();
+		//UsuarioModel usuarioRepresentante = usuarioRepository.findById(refugioDTO.getIdRepresentante()).get();
+		UsuarioModel usuarioRepresentante = usuarioRepository.findByDni(refugioDTO.getDniRepresentante()).get();
+
 		
 		RefugioModel refugioNuevo = new RefugioModel();
 			refugioNuevo.setDireccion(refugioDTO.getDireccion());
@@ -63,10 +65,11 @@ public class RefugioService {
 					String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
 					refugioSingle.setFechaRegistro(fechaRegistro);
 				
-				refugioSingle.setIdRepresentante(p.getUsuario().getId());
+				//refugioSingle.setIdRepresentante(p.getUsuario().getId());
 				refugioSingle.setNombre(p.getNombre());
 				refugioSingle.setNumeroAsociados(p.getNumeroAsociados());
 				refugioSingle.setNumeroContacto(p.getNumeroContacto());
+				refugioSingle.setDniRepresentante(p.getUsuario().getDni());
 
 			listaEnviar.add(refugioSingle);
 			
@@ -92,10 +95,12 @@ public class RefugioService {
 					String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
 					refugioSingle.setFechaRegistro(fechaRegistro);
 				
-				refugioSingle.setIdRepresentante(p.getUsuario().getId());
+				//refugioSingle.setIdRepresentante(p.getUsuario().getId());
 				refugioSingle.setNombre(p.getNombre());
 				refugioSingle.setNumeroAsociados(p.getNumeroAsociados());
 				refugioSingle.setNumeroContacto(p.getNumeroContacto());
+				refugioSingle.setDniRepresentante(p.getUsuario().getDni());
+
 
 			listaEnviar.add(refugioSingle);
 			
@@ -118,10 +123,12 @@ public class RefugioService {
 				String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
 				refugioSingle.setFechaRegistro(fechaRegistro);
 			
-			refugioSingle.setIdRepresentante(p.getUsuario().getId());
+			//refugioSingle.setIdRepresentante(p.getUsuario().getId());
 			refugioSingle.setNombre(p.getNombre());
 			refugioSingle.setNumeroAsociados(p.getNumeroAsociados());
 			refugioSingle.setNumeroContacto(p.getNumeroContacto());
+			refugioSingle.setDniRepresentante(p.getUsuario().getDni());
+
 
 		return refugioSingle;
 	}

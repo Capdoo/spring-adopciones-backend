@@ -13,6 +13,7 @@ public class RefugioDTO {
 	private String fechaRegistro;
 	
 	private int idRepresentante;
+	private String dniRepresentante;
 
 
 	public RefugioDTO() {
@@ -92,6 +93,14 @@ public class RefugioDTO {
 
 	public void setFechaRegistro(String fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
+	}
+
+	public String getDniRepresentante() {
+		return dniRepresentante;
+	}
+
+	public void setDniRepresentante(String dniRepresentante) {
+		this.dniRepresentante = dniRepresentante;
 	}
 
 }

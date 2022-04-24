@@ -13,6 +13,8 @@ public interface UsuarioRepository extends JpaRepository<UsuarioModel, Integer>{
 
 	Optional<UsuarioModel> findByNombreUsuario(String nombreUsuario);
 	Optional<UsuarioModel> findById(int id);
+	Optional<UsuarioModel> findByDni(String dni);
+
 	
 	boolean existsByNombreUsuario(String nombreUsuario);
 	boolean existsByEmail(String email);
