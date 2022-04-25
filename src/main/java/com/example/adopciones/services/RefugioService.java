@@ -76,6 +76,7 @@ public class RefugioService {
 					String fechaRegistro = fechaUtil.convertirFecha(p.getFechaRegistro());
 					refugioSingle.setFechaRegistro(fechaRegistro);
 				
+					//Nuevo
 				//refugioSingle.setIdRepresentante(null);
 				refugioSingle.setNombre(p.getNombre());
 				refugioSingle.setNumeroAsociados(p.getNumeroAsociados());
