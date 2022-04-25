@@ -33,7 +33,8 @@ public class MascotaModel {
 	private String caracteristica;
 	private String tamano;
 	
-
+	//link de imagen
+	private String linkImg;
 	
 	@ManyToOne
 	@JoinColumn(name="dueño_id",referencedColumnName = "id", nullable=true)
@@ -206,7 +207,25 @@ public class MascotaModel {
 	public void setRefugio(RefugioModel refugio) {
 		this.refugio = refugio;
 	}
+
+
+
+	public Set<BusquedaModel> getAdopciones() {
+		return adopciones;
+	}
+
+	public void setAdopciones(Set<BusquedaModel> adopciones) {
+		this.adopciones = adopciones;
+	}
 	
 	
+	//Imagen link
+	public String getLinkImg() {
+		return linkImg;
+	}
+
+	public void setLinkImg(String linkImg) {
+		this.linkImg = linkImg;
+	}
 
 }

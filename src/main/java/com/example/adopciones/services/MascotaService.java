@@ -1,5 +1,6 @@
 package com.example.adopciones.services;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,10 @@ public class MascotaService {
 	@Autowired
 	DetalleRepository detalleRepository;
 	
-	public void save(MascotaDTO mascotaDTO) {
+	@Autowired
+	FileUploadService fileUploadService;
+	
+	public void save(MascotaDTO mascotaDTO) throws IOException {
 		
 		DuenoModel duenoMascota = duenoRepository.findById(mascotaDTO.getIdDueno()).get();
 		FechaUtil fechaUtil = new FechaUtil();
@@ -57,7 +61,15 @@ public class MascotaService {
 				mascotaNueva.setRazaEspecifica(mascotaDTO.getEspecie()+"#"+mascotaDTO.getRazaEspecifica());
 				mascotaNueva.setDetalle(null);
 			}
+			
 		mascotaNueva.setRefugio(null);
+		
+				String encoded = fileUploadService.obtenerEncoded(mascotaDTO.getEncoded());
+				byte[] imagen = fileUploadService.convertStringToBytes(encoded);
+				String url = fileUploadService.fileUpload(imagen);
+				
+				mascotaNueva.setLinkImg(url);
+			
 		mascotaRepository.save(mascotaNueva);
 	}
 	

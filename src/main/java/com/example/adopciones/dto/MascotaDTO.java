@@ -19,6 +19,10 @@ public class MascotaDTO {
 	private int idDueno;
 	private int idDetalle;
 	
+	//Para imagen
+	private String encoded;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -96,6 +100,12 @@ public class MascotaDTO {
 	}
 	public void setEspecie(String especie) {
 		this.especie = especie;
+	}
+	public String getEncoded() {
+		return encoded;
+	}
+	public void setEncoded(String encoded) {
+		this.encoded = encoded;
 	}
 
 	
