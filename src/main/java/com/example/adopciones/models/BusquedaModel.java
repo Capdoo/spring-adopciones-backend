@@ -29,6 +29,8 @@ public class BusquedaModel {
 	private String telefonoB;
 	private String mensaje;
 	
+	private String linkImg;
+	
 	@ManyToOne
 	@JoinColumn(name="mascota_id",referencedColumnName = "id", nullable=false)
 	private MascotaModel mascota;
@@ -125,6 +127,16 @@ public class BusquedaModel {
 	public void setMascota(MascotaModel mascota) {
 		this.mascota = mascota;
 	}
+	
+	//Img
+	public String getLinkImg() {
+		return linkImg;
+	}
 
+	public void setLinkImg(String linkImg) {
+		this.linkImg = linkImg;
+	}
+
+	//Img
 	
 }

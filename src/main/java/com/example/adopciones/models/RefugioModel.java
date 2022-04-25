@@ -30,6 +30,9 @@ public class RefugioModel {
 	private String direccion;
 	private String distrito;
 
+	//link de imagen
+	private String linkImg;
+	
 	//Id del representante (OneToOne)
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "REFUGIO_FK_USUARIO"))
@@ -128,6 +131,15 @@ public class RefugioModel {
 
 	public void setFechaRegistro(Timestamp fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
+	}
+	
+	//
+	public String getLinkImg() {
+		return linkImg;
+	}
+
+	public void setLinkImg(String linkImg) {
+		this.linkImg = linkImg;
 	}
 	
 }

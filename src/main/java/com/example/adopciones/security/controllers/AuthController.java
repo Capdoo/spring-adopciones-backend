@@ -1,5 +1,6 @@
 package com.example.adopciones.security.controllers;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +31,7 @@ import com.example.adopciones.security.models.RolModel;
 import com.example.adopciones.security.models.UsuarioModel;
 import com.example.adopciones.security.services.RolService;
 import com.example.adopciones.security.services.UsuarioService;
+import com.example.adopciones.services.FileUploadService;
 
 
 
@@ -54,8 +56,11 @@ public class AuthController {
 	@Autowired
 	JwtProvider jwtProvider;
 	
+	@Autowired
+	FileUploadService fileUploadService;
+	
 	@PostMapping("/nuevo")
-	public ResponseEntity<Object> nuevo(@RequestBody NuevoUsuarioDTO nuevoUsuarioDTO, BindingResult bindingResult){
+	public ResponseEntity<Object> nuevo(@RequestBody NuevoUsuarioDTO nuevoUsuarioDTO, BindingResult bindingResult) throws IOException{
 		if (bindingResult.hasErrors()) {
 			return new ResponseEntity(new MensajeDTO("Campos mal colocados"), HttpStatus.BAD_REQUEST);
 		}
@@ -89,6 +94,12 @@ public class AuthController {
 			usuarioModel.setPassword(passwordEncoder.encode(nuevoUsuarioDTO.getPassword()));
 			usuarioModel.setTelefono(nuevoUsuarioDTO.getTelefono());
 		
+				String encoded = fileUploadService.obtenerEncoded(nuevoUsuarioDTO.getEncoded());
+				byte[] imagen = fileUploadService.convertStringToBytes(encoded);
+				String url = fileUploadService.fileUpload(imagen);
+			
+				usuarioModel.setLinkImg(url);
+			
 		
 		
 		Set<RolModel> roles = new HashSet<>();

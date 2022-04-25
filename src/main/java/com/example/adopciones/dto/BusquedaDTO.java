@@ -19,6 +19,10 @@ public class BusquedaDTO {
 	
 	//Mensaje
 	private String mensaje;
+	
+	//Imagen
+	private String encoded;
+	private String urlLink;
 
 	public BusquedaDTO() {
 		super();
@@ -149,6 +153,27 @@ public class BusquedaDTO {
 	}
 
 
+	//Imagen
+	public String getEncoded() {
+		return encoded;
+	}
+
+
+	public void setEncoded(String encoded) {
+		this.encoded = encoded;
+	}
+
+
+	public String getUrlLink() {
+		return urlLink;
+	}
+
+
+	public void setUrlLink(String urlLink) {
+		this.urlLink = urlLink;
+	}
+
+	//
 	
 	
 }

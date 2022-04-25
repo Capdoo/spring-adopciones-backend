@@ -18,6 +18,10 @@ public class NuevoUsuarioDTO {
 	private String password;
 	
 	
+	//img
+	//Para imagen
+	private String encoded;
+	private String urlLink;
 	
 	
 	private Set<String> roles = new HashSet<>();
@@ -87,6 +91,21 @@ public class NuevoUsuarioDTO {
 		this.telefono = telefono;
 	}
 	
-
+	//img
+	public String getEncoded() {
+		return encoded;
+	}
+	public void setEncoded(String encoded) {
+		this.encoded = encoded;
+	}
+	public String getUrlLink() {
+		return urlLink;
+	}
+	public void setUrlLink(String urlLink) {
+		this.urlLink = urlLink;
+	}
+	
+	///img
+	
 	
 }

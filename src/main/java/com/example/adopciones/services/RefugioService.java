@@ -1,5 +1,6 @@
 package com.example.adopciones.services;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,10 @@ public class RefugioService {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 
-	public void save(RefugioDTO refugioDTO) {
+	@Autowired
+	FileUploadService fileUploadService;
+	
+	public void save(RefugioDTO refugioDTO) throws IOException {
 		
 		//UsuarioModel usuarioRepresentante = usuarioRepository.findById(refugioDTO.getIdRepresentante()).get();
 		UsuarioModel usuarioRepresentante = usuarioRepository.findByDni(refugioDTO.getDniRepresentante()).get();
@@ -42,6 +46,12 @@ public class RefugioService {
 			refugioNuevo.setNumeroAsociados(refugioDTO.getNumeroAsociados());
 			refugioNuevo.setNumeroContacto(refugioDTO.getNumeroContacto());
 			refugioNuevo.setUsuario(usuarioRepresentante);
+			
+				String encoded = fileUploadService.obtenerEncoded(refugioDTO.getEncoded());
+				byte[] imagen = fileUploadService.convertStringToBytes(encoded);
+				String url = fileUploadService.fileUpload(imagen);
+				
+			refugioNuevo.setLinkImg(url);
 						
 		refugioRepository.save(refugioNuevo);
 	}
@@ -72,6 +82,8 @@ public class RefugioService {
 				refugioSingle.setNumeroContacto(p.getNumeroContacto());
 				refugioSingle.setDniRepresentante(p.getUsuario().getDni());
 
+				refugioSingle.setUrlLink(p.getLinkImg());
+				
 			listaEnviar.add(refugioSingle);
 			
 		}
@@ -102,7 +114,8 @@ public class RefugioService {
 				refugioSingle.setNumeroContacto(p.getNumeroContacto());
 				refugioSingle.setDniRepresentante(p.getUsuario().getDni());
 
-
+				refugioSingle.setUrlLink(p.getLinkImg());
+				
 			listaEnviar.add(refugioSingle);
 			
 		}
@@ -130,6 +143,7 @@ public class RefugioService {
 			refugioSingle.setNumeroContacto(p.getNumeroContacto());
 			refugioSingle.setDniRepresentante(p.getUsuario().getDni());
 
+			refugioSingle.setUrlLink(p.getLinkImg());
 
 		return refugioSingle;
 	}

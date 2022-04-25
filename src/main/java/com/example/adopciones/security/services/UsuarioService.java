@@ -46,6 +46,9 @@ public class UsuarioService {
 				usuarioSingle.setNombreUsuario(p.getNombreUsuario());
 				usuarioSingle.setTelefono(p.getTelefono());
 				
+				
+				usuarioSingle.setUrlLink(p.getLinkImg());
+				
 			listaEnviar.add(usuarioSingle);
 		}
 

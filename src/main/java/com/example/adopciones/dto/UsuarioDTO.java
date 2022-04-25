@@ -12,6 +12,11 @@ public class UsuarioDTO {
 	private String telefono;
 	private String nombreUsuario;
 	
+	
+	//Para imagen
+	private String encoded;
+	private String urlLink;
+	
 	public UsuarioDTO() {
 		super();
 	}
@@ -87,6 +92,25 @@ public class UsuarioDTO {
 	public void setId(int id) {
 		this.id = id;
 	}
+	//img
+
+	public String getEncoded() {
+		return encoded;
+	}
+
+	public void setEncoded(String encoded) {
+		this.encoded = encoded;
+	}
+
+	public String getUrlLink() {
+		return urlLink;
+	}
+
+	public void setUrlLink(String urlLink) {
+		this.urlLink = urlLink;
+	}
+	
+	
 
 	
 }

@@ -1,5 +1,6 @@
 package com.example.adopciones.services;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,11 @@ public class BusquedaService {
 	
 	@Autowired
 	MascotaRepository mascotaRepository;
+	
+	@Autowired
+	FileUploadService fileUploadService;
 
-	public void save(BusquedaDTO busquedaDTO) {
+	public void save(BusquedaDTO busquedaDTO) throws IOException {
 		
 		FechaUtil fechaUtil = new FechaUtil();
 		MascotaModel mascotaSeleccionada = mascotaRepository.findById(busquedaDTO.getMascotaId()).get();
@@ -43,6 +47,14 @@ public class BusquedaService {
 			busquedaNueva.setTelefonoB(busquedaDTO.getTelefonoB());
 			
 			busquedaNueva.setMensaje(busquedaDTO.getMensaje());
+			
+				String encoded = fileUploadService.obtenerEncoded(busquedaDTO.getEncoded());
+				byte[] imagen = fileUploadService.convertStringToBytes(encoded);
+				String url = fileUploadService.fileUpload(imagen);
+				
+				busquedaNueva.setLinkImg(url);
+			
+			
 		busquedaRepository.save(busquedaNueva);
 	}
 	
@@ -82,6 +94,8 @@ public class BusquedaService {
 					busquedaSingle.setRazaMascota(stringUtil.obtenerRazaToken(p.getMascota().getRazaEspecifica()));
 				}
 				
+				busquedaSingle.setUrlLink(p.getLinkImg());
+				
 			listaEnviar.add(busquedaSingle);
 			
 		}
@@ -112,6 +126,9 @@ public class BusquedaService {
 				busquedaSingle.setTelefonoA(p.getTelefonoA());
 				busquedaSingle.setTelefonoB(p.getTelefonoB());
 				busquedaSingle.setMensaje(p.getMensaje());
+				
+				busquedaSingle.setUrlLink(p.getLinkImg());
+				
 			listaEnviar.add(busquedaSingle);
 			
 		}
@@ -140,6 +157,8 @@ public class BusquedaService {
 			busquedaSingle.setTelefonoB(p.getTelefonoB());
 			
 			busquedaSingle.setMensaje(p.getMensaje());
+			
+			busquedaSingle.setUrlLink(p.getLinkImg());
 
 		return busquedaSingle;
 	}

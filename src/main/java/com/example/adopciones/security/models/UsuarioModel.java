@@ -52,6 +52,9 @@ public class UsuarioModel {
 	
 	private String password;
 	
+	//
+	private String linkImg;	
+	
 	//Dueño referenciado
 	@OneToOne(cascade =  CascadeType.ALL,mappedBy = "usuario")
 	private DuenoModel dueno;
@@ -195,8 +198,20 @@ public class UsuarioModel {
 
 	public void setDueño(DuenoModel dueño) {
 		this.dueno = dueño;
+	}
+
+
+//
+
+	public String getLinkImg() {
+		return linkImg;
+	}
+
+	public void setLinkImg(String linkImg) {
+		this.linkImg = linkImg;
 	} 
 
+	//
 	
 	
 }
