@@ -109,6 +109,7 @@ public class MascotaService {
 					mascotaSingle.setRazaEspecifica(stringUtil.obtenerRazaToken(p.getRazaEspecifica()));
 				}
 				
+				mascotaSingle.setUrlLink(mascotaSingle.getUrlLink());
 				
 			listaMascotas.add(mascotaSingle);
 		}

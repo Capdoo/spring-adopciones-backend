@@ -21,7 +21,7 @@ public class MascotaDTO {
 	
 	//Para imagen
 	private String encoded;
-	
+	private String urlLink;
 	
 	public int getId() {
 		return id;
@@ -107,6 +107,12 @@ public class MascotaDTO {
 	public void setEncoded(String encoded) {
 		this.encoded = encoded;
 	}
-
+	public String getUrlLink() {
+		return urlLink;
+	}
+	public void setUrlLink(String urlLink) {
+		this.urlLink = urlLink;
+	}
+	
 	
 }
